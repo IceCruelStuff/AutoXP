@@ -50,26 +50,62 @@ class Main extends PluginBase implements Listener {
 	 * @priority HIGHEST
 	 */
 	public function onBreak(BlockBreakEvent $event) {
-		if ($event->isCancelled()) {
+		if ($event->isCancelled() || $this->getConfig()->get("disable-autoxp") == true) {
 			return;
 		}
-		$event->getPlayer()->addXp($event->getXpDropAmount());
-		$event->setXpDropAmount(0);
+		if ($this->getConfig()->get("disable-block-experience") == true) {
+			if ($this->getConfig()->get("drop-normal-xp-for-disabled-options") == false) {
+				$event->setXpDropAmount(0);
+			}
+		} else {
+			$players = $this->getConfig()->get("blacklisted-players");
+			foreach ($players as $player) {
+				if ($event->getPlayer()->getName() === $player) {
+					if ($this->getConfig()->get("drop-normal-xp-for-blacklisted-players") == false) {
+						$event->setXpDropAmount(0);
+					}
+				} else {
+					$event->getPlayer()->addXp($event->getXpDropAmount());
+					$event->setXpDropAmount(0);
+				}
+			}
+		}
 	}
-
 
 	/**
 	 * @param PlayerDeathEvent $event
 	 * @priority HIGHEST
 	 */
 	public function onPlayerKill(PlayerDeathEvent $event) {
+		if ($this->getConfig()->get("disable-autoxp") == true) {
+			return;
+		}
 		$player = $event->getPlayer();
 		$cause = $player->getLastDamageCause();
 		if ($cause instanceof EntityDamageByEntityEvent) {
 			$damager = $cause->getDamager();
-			if ($damager instanceof Player) {
-				$damager->addXp($player->getXpDropAmount());
-				$player->setCurrentTotalXp(0);
+			if ($this->getConfig()->get("disable-player-experience") == true) {
+				if ($this->getConfig()->get("drop-normal-xp-for-disabled-options") == false) {
+					if (!$event->getKeepInventory()) {
+						$player->setCurrentTotalXp(0);
+					}
+				}
+			} else {
+				$players = $this->getConfig()->get("blacklisted-players");
+				foreach ($players as $blacklistedPlayer) {
+					if ($damager instanceof Player) {
+						if ($damager->getName() === $blacklistedPlayer) {
+							if ($this->getConfig()->get("drop-normal-xp-for-blacklisted-players") == false) {
+								if (!$event->getKeepInventory()) {
+									$player->setCurrentTotalXp(0);
+								}
+							}
+						} else {
+							$damager->addXp($player->getXpDropAmount());
+							$player->setCurrentTotalXp(0);
+						}
+					}
+				}
 			}
 		}
 	}
