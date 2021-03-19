@@ -1,0 +1,28 @@
+---
+# Disable AutoXP
+disable-autoxp: false
+
+# Disables AutoXP for mining blocks
+# Normal XP will still drop if "drop-normal-xp-for-disabled-options" is set to "true"
+disable-block-experience: false
+
+# Disables AutoXP for killing players
+# Normal XP will still drop if "drop-normal-xp-for-disabled-options" is set to "true"
+disable-player-experience: false
+
+# Disables AutoXP for killing mobs
+# Normal XP will still drop if "drop-normal-xp-for-disabled-options" is set to "true"
+disable-mob-experience: false
+
+# Blacklisted players will not be able to collect any experience from AutoXP
+# Normal XP will still drop if "drop-normal-xp-for-disabled-options" is set to "true"
+blacklisted-players:
+  # Example:
+  # blacklisted-players:
+  #   - ExamplePlayer
+
+# If enabled, it will drop normal XP if the options above
+# are disabled. If disabled, it will not drop normal XP if the
+# options above are disabled.
+drop-normal-xp-for-disabled-options: true
+...
