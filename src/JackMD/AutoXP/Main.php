@@ -39,8 +39,10 @@ use pocketmine\plugin\PluginBase;
 class Main extends PluginBase implements Listener {
 
 	public function onEnable(): void {
+		@mkdir($this->getDataFolder());
+		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents(($this), $this);
-		$this->getLogger()->info("Plugin Enabled.");
+		// $this->getLogger()->info("AutoXP Enabled.");
 	}
 
 	/**
@@ -71,4 +73,5 @@ class Main extends PluginBase implements Listener {
 			}
 		}
 	}
+
 }
