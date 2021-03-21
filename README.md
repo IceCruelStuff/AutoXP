@@ -2,22 +2,32 @@
 
 # AutoXP
 
-| HitCount | License | Poggit | Release |
-|:--:|:--:|:--:|:--:|
-|[![HitCount](http://hits.dwyl.io/JackMD/AutoXP.svg)](http://hits.dwyl.io/JackMD/AutoXP)|[![GitHub license](https://img.shields.io/github/license/JackMD/AutoXP.svg)](https://github.com/IceCruelStuff/AutoXP/blob/master/LICENSE)|[![Poggit-CI](https://poggit.pmmp.io/ci.shield/JackMD/AutoXP/AutoXP)](https://poggit.pmmp.io/ci/JackMD/AutoXP/AutoXP)|[![](https://poggit.pmmp.io/shield.state/AutoXP)](https://poggit.pmmp.io/p/AutoXP)|
+| License | Poggit | ![Download](https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_file_download_black_18px.svg) Latest Release |
+|:--:|:--:|:--:|
+[![GitHub license](https://img.shields.io/github/license/IceCruelStuff/AutoXP.svg)](https://github.com/IceCruelStuff/AutoXP/blob/master/LICENSE) | [![Poggit-CI](https://poggit.pmmp.io/ci.shield/IceCruelStuff/AutoXP/AutoXP)](https://poggit.pmmp.io/ci/IceCruelStuff/AutoXP/AutoXP) | [![](https://img.shields.io/badge/download-latest-blue.svg)](https://github.com/IceCruelStuff/AutoXP/releases) |
 
 This plugin is forked from **[Ifera/AutoXP](https://github.com/Ifera/AutoXP)**.
 
+## About
+AutoXP automatically transfers all the xp to your experience bar without dropping any. It's a great way to reduce lag caused by Experience Orbs.
+
 ### Features:
- - AutoXP automatically transfers all the xp to your experience bar without dropping any.
- - Great way to reduce lag caused by Experience Orbs.
+- Customizable (you can customize features in `config.yml`)
+- Transfers XP from killing mobs to experience bar instantly
+- Transfers XP from killing players to experience bar instantly
+- Transfers XP from mining to experience bar instantly
+
+### Changes compared to the original
+- AutoXP for mobs
+- Option to blacklist players
+- Option to disable certain features 
 
 ### Usage
- - Get the [.phar](https://poggit.pmmp.io/ci/JackMD/AutoXP/AutoXP) and drop the into your `plugins` folder.
+ - Get the **[.phar](https://github.com/IceCruelStuff/AutoXP/releases)** and drop the into your `plugins` folder.
  - Start the server.
- - Start mining blocks.
+ - Start mining blocks or kill entities.
 
-### Disclaimer:
+### License
 
 ```
 This software is licensed under "GNU General Public License v3.0".
