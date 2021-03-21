@@ -31,6 +31,7 @@ namespace JackMD\AutoXP;
 
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\Player;
@@ -103,6 +104,36 @@ class Main extends PluginBase implements Listener {
 						} else {
 							$damager->addXp($player->getXpDropAmount());
 							$player->setCurrentTotalXp(0);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public function onDeath(EntityDeathEvent $event) {
+		if ($this->getConfig()->get("disable-autoxp") == true) {
+			return;
+		}
+		$entity = $event->getEntity();
+		$cause = $entity->getLastDamageCause();
+		if ($cause instanceof EntityDamageByEntityEvent) {
+			$damager = $cause->getDamager();
+			if ($this->getConfig()->get("disable-mob-experience") == true) {
+				if ($this->getConfig()->get("drop-normal-xp-for-disabled-options") == false) {
+					$event->setXpDropAmount(0);
+				}
+			} else {
+				$players = $this->getConfig()->get("blacklisted-players");
+				foreach ($players as $player) {
+					if ($damager instanceof Player) {
+						if ($damager->getName() === $player) {
+							if ($this->getConfig()->get("drop-normal-xp-for-blacklisted-players") == false) {
+								$event->setXpDropAmount(0);
+							}
+						} else {
+							$damager->addXp($event->getXpDropAmount());
+							$event->setXpDropAmount(0);
 						}
 					}
 				}
