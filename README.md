@@ -19,7 +19,7 @@ AutoXP automatically transfers all the xp to your experience bar without droppin
 
 ### Changes compared to the original
 - AutoXP for mobs
-- Option to blacklist players
+- Option to disable auto xp for certain players
 - Option to disable certain features 
 
 ### Usage
