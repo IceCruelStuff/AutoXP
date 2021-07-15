@@ -51,10 +51,10 @@ class Main extends PluginBase implements Listener {
 	 * @priority HIGHEST
 	 */
 	public function onBreak(BlockBreakEvent $event) {
-		if ($event->isCancelled() || $this->getConfig()->get("disable-autoxp") == true) {
+		if ($event->isCancelled() || $this->getConfig()->get("disable-autoxp")) {
 			return;
 		}
-		if ($this->getConfig()->get("disable-block-experience") == true) {
+		if ($this->getConfig()->get("disable-block-experience")) {
 			if ($this->getConfig()->get("drop-normal-xp-for-disabled-options") == false) {
 				$event->setXpDropAmount(0);
 			}
@@ -62,7 +62,7 @@ class Main extends PluginBase implements Listener {
 			$players = $this->getConfig()->get("blacklisted-players");
 			foreach ($players as $player) {
 				if ($event->getPlayer()->getName() === $player) {
-					if ($this->getConfig()->get("drop-normal-xp-for-blacklisted-players") == false) {
+					if ($this->getConfig()->get("drop-normal-xp-for-disabled-players") == false) {
 						$event->setXpDropAmount(0);
 					}
 				} else {
@@ -85,7 +85,7 @@ class Main extends PluginBase implements Listener {
 		$cause = $player->getLastDamageCause();
 		if ($cause instanceof EntityDamageByEntityEvent) {
 			$damager = $cause->getDamager();
-			if ($this->getConfig()->get("disable-player-experience") == true) {
+			if ($this->getConfig()->get("disable-player-experience")) {
 				if ($this->getConfig()->get("drop-normal-xp-for-disabled-options") == false) {
 					if (!$event->getKeepInventory()) {
 						$player->setCurrentTotalXp(0);
@@ -96,7 +96,7 @@ class Main extends PluginBase implements Listener {
 				foreach ($players as $blacklistedPlayer) {
 					if ($damager instanceof Player) {
 						if ($damager->getName() === $blacklistedPlayer) {
-							if ($this->getConfig()->get("drop-normal-xp-for-blacklisted-players") == false) {
+							if ($this->getConfig()->get("drop-normal-xp-for-disabled-players") == false) {
 								if (!$event->getKeepInventory()) {
 									$player->setCurrentTotalXp(0);
 								}
@@ -111,15 +111,18 @@ class Main extends PluginBase implements Listener {
 		}
 	}
 
+	/**
+	 * @param EntityDeathEvent $event
+	 */
 	public function onDeath(EntityDeathEvent $event) {
-		if ($this->getConfig()->get("disable-autoxp") == true) {
+		if ($this->getConfig()->get("disable-autoxp")) {
 			return;
 		}
 		$entity = $event->getEntity();
 		$cause = $entity->getLastDamageCause();
 		if ($cause instanceof EntityDamageByEntityEvent) {
 			$damager = $cause->getDamager();
-			if ($this->getConfig()->get("disable-mob-experience") == true) {
+			if ($this->getConfig()->get("disable-mob-experience")) {
 				if ($this->getConfig()->get("drop-normal-xp-for-disabled-options") == false) {
 					$event->setXpDropAmount(0);
 				}
@@ -128,7 +131,7 @@ class Main extends PluginBase implements Listener {
 				foreach ($players as $player) {
 					if ($damager instanceof Player) {
 						if ($damager->getName() === $player) {
-							if ($this->getConfig()->get("drop-normal-xp-for-blacklisted-players") == false) {
+							if ($this->getConfig()->get("drop-normal-xp-for-disabled-players") == false) {
 								$event->setXpDropAmount(0);
 							}
 						} else {
