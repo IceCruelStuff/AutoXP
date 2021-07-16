@@ -14,11 +14,11 @@ disable-player-experience: false
 # Normal XP will still drop if "drop-normal-xp-for-disabled-options" is set to "true"
 disable-mob-experience: false
 
-# Blacklisted players will not be able to collect any experience from AutoXP
-# Normal XP will still drop if "drop-normal-xp-for-blacklisted-players" is set to "true"
-blacklisted-players:
+# Disabled players will not be able to collect any experience from AutoXP
+# Normal XP will still drop if "drop-normal-xp-for-disabled-players" is set to "true"
+disabled-players:
   # Example:
-  # blacklisted-players:
+  # disabled-players:
   #   - ExamplePlayer
 
 # If enabled, it will drop normal XP if the options above
@@ -26,6 +26,6 @@ blacklisted-players:
 # options above are disabled.
 drop-normal-xp-for-disabled-options: true
 
-# If enabled, it will drop normal XP for blacklisted players
-drop-normal-xp-for-blacklisted-players: true
+# If enabled, it will drop normal XP for disabled players
+drop-normal-xp-for-disabled-players: true
 ...
